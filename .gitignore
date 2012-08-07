@@ -1,0 +1,13 @@
+## Compiled Sources ##
+*.py[cod]
+
+## Project Files ##
+# should be excluded in any real projects
+*.sublime-project
+*.sublime-workspace
+
+## Logs, Savefiles and Databases ##
+*.log
+*.sav
+*.sql
+*.sqlite
