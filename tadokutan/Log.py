@@ -3,7 +3,7 @@
 
 ######
 ##  Tadoku-Tan -- Offline Tadoku Reading Log
-##  TadokuLog.py -- class container for the tadoku log
+##  Log.py -- class container for the tadoku log
 ######
 
 import datetime

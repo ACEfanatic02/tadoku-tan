@@ -3,8 +3,7 @@
 
 ######
 ##  Tadoku-Tan -- Offline Tadoku Reading Log
-##  TadokuTweet.py -- tie into the Twitter API to post updates
-##  File ver0.1
+##  Tweet.py -- tie into the Twitter API to post updates
 ######
 
 import twitter
