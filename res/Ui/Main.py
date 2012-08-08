@@ -18,11 +18,9 @@ class Ui_MainWindow(object):
 
     def setupUi(self, MainWindow):
         # Setup the window itself and its central widget
-        MainWindow.setObjectName(_fromUtf8("MainWindow"))
         MainWindow.setFixedSize(400, 300)
         MainWindow.setWindowTitle("Tadoku-Tan")
         self.centralwidget = QtGui.QWidget(MainWindow)
-        self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         MainWindow.setCentralWidget(self.centralwidget)
 
         # Setup individual parts of the window
@@ -33,15 +31,12 @@ class Ui_MainWindow(object):
         # Setup the overall layout of the window
         self.setupLayout()
 
-
     def setupMediaButtons(self):
         # Setup group box surrounding the media selections
         self.mediaBox = QtGui.QGroupBox(self.centralwidget)
         self.mediaBox.setGeometry(QtCore.QRect(225, 0, 200, 250))
-        self.mediaBox.setObjectName(_fromUtf8("mediaBox"))
         self.mediaBox.setTitle("Media:")
         self.mediaButtonGroup = QtGui.QButtonGroup(self.mediaBox)
-        self.mediaButtonGroup.setObjectName(_fromUtf8("self.mediaButtonGroup"))
 
         # Create media radio buttons and checkboxes
         self.book_radio   = QtGui.QRadioButton(_fromUtf8("Book"), parent=self.mediaBox)
@@ -73,42 +68,94 @@ class Ui_MainWindow(object):
         self.book_radio.setChecked(True)
         self.book_radio.toggled.connect(self._drTie)
 
-        # Set object names (TODO: CHECK - Is this really necessary?)
-        self.book_radio.setObjectName(_fromUtf8("book_radio"))
-        self.manga_radio.setObjectName(_fromUtf8("manga_radio"))
-        self.flgame_radio.setObjectName(_fromUtf8("flgame_radio"))
-        self.game_radio.setObjectName(_fromUtf8("game_radio"))
-        self.net_radio.setObjectName(_fromUtf8("net_radio"))
-        self.news_radio.setObjectName(_fromUtf8("news_radio"))
-        self.nico_radio.setObjectName(_fromUtf8("nico_radio"))
-        self.subs_radio.setObjectName(_fromUtf8("subs_radio"))
-        self.sent_radio.setObjectName(_fromUtf8("sent_radio"))
-        self.lyric_radio.setObjectName(_fromUtf8("lyric_radio"))
-        self.dr_check.setObjectName(_fromUtf8("dr_check"))
-
         # Setup sub-layout for the media buttons
-        self.mediaGrid = QtGui.QGridLayout(self.mediaBox)
-        self.mediaGrid.addWidget(self.book_radio, 1, 1)
-        self.mediaGrid.addWidget(self.manga_radio, 2, 1)
-        self.mediaGrid.addWidget(self.flgame_radio, 3, 1)
-        self.mediaGrid.addWidget(self.game_radio, 4, 1)
-        self.mediaGrid.addWidget(self.news_radio, 5, 1)
-        self.mediaGrid.addWidget(self.nico_radio, 6, 1)
-        self.mediaGrid.addWidget(self.dr_check, 11, 1,)
-        self.mediaGrid.addWidget(self.subs_radio, 7, 1)
-        self.mediaGrid.addWidget(self.sent_radio, 8, 1)
-        self.mediaGrid.addWidget(self.lyric_radio, 9, 1)
-        self.mediaGrid.addWidget(self.net_radio, 10, 1)
+        self.mediaGrid = QtGui.QVBoxLayout()
+        self.mediaGrid.setGeometry(QtCore.QRect(225, 0, 200, 250))
+        self.mediaGrid.addWidget(self.book_radio)
+        self.mediaGrid.addWidget(self.manga_radio)
+        self.mediaGrid.addWidget(self.flgame_radio)
+        self.mediaGrid.addWidget(self.game_radio)
+        self.mediaGrid.addWidget(self.news_radio)
+        self.mediaGrid.addWidget(self.nico_radio)
+        self.mediaGrid.addWidget(self.subs_radio)
+        self.mediaGrid.addWidget(self.sent_radio)
+        self.mediaGrid.addWidget(self.lyric_radio)
+        self.mediaGrid.addWidget(self.net_radio)
+        self.mediaGrid.addWidget(self.dr_check)
+        self.mediaGrid.addStretch(1)
+        self.mediaBox.setLayout(self.mediaGrid)
 
 
     def setupMenuAndStatusBars(self):
-        pass
+        # Status bar
+        self.statusbar = QtGui.QStatusBar(MainWindow)
+        MainWindow.setStatusBar(self.statusbar)
+
+        # Menu bar
+        self.menubar = QtGui.QMenuBar(MainWindow)
+        MainWindow.setMenuBar(self.menubar)
+
+        # File menu
+        self.menuFile = QtGui.QMenu(self.menubar)
+        self.menuFile.setTitle(_fromUtf8("&File"))
+        self.actionLoad = QtGui.QAction(MainWindow)
+        self.actionSave = QtGui.QAction(MainWindow)
+        self.actionQuit = QtGui.QAction(MainWindow)
+        self.actionLoad.setText(_fromUtf8("&Load..."))
+        self.actionSave.setText(_fromUtf8("&Save"))
+        self.actionQuit.setText(_fromUtf8("&Quit"))
+
+        self.menuFile.addAction(self.actionLoad)
+        self.menuFile.addAction(self.actionSave)
+        self.menuFile.addSeparator()
+        self.menuFile.addAction(self.actionQuit)
+
+        self.menubar.addMenu(self.menuFile)
 
     def setupSubmitAndLabels(self):
-        pass
+        # Create submit fields
+        self.amountRead = QtGui.QLineEdit(self.centralwidget)
+        self.timesRead  = QtGui.QLineEdit(self.centralwidget)
+
+        # Buttons
+        self.submitButton  = QtGui.QPushButton(self.centralwidget)
+        self.scoresButton  = QtGui.QPushButton(self.centralwidget)
+        self.entriesButton = QtGui.QPushButton(self.centralwidget)
+        self.submitButton.setText(_fromUtf8("Submit"))
+        self.scoresButton.setText(_fromUtf8("Scores..."))
+        self.entriesButton.setText(_fromUtf8("Entries..."))
+
+        # Score labels
+        self.totalscorelb = QtGui.QLabel(_fromUtf8("Total Score:"), parent=self.centralwidget)
+        self.total_score  = QtGui.QLabel(_fromUtf8("0"), parent=self.centralwidget)
+        self.total_score.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignVCenter)
+
+        # Setup sub-layout for submit fields
+        self.submitLayout = QtGui.QGridLayout()
+        self.submitLayout.setVerticalSpacing(10)
+        self.submitLayout.addWidget(QtGui.QLabel(_fromUtf8("Amount Read:")),
+                                    1, 1)
+        self.submitLayout.addWidget(QtGui.QLabel(_fromUtf8("Times Read:")),
+                                    2, 1)
+        self.submitLayout.addWidget(self.amountRead, 1, 2, 1, 2)
+        self.submitLayout.addWidget(self.timesRead, 2, 2, 1, 2)
+        self.submitLayout.addWidget(self.submitButton, 3, 1,)
+
+        self.submitLayout.addWidget(self.totalscorelb, 4, 1, 2, 1)
+        self.submitLayout.addWidget(self.total_score, 4, 2, 2, 2)
+
+        self.submitLayout.addWidget(self.scoresButton, 5, 1)
+        self.submitLayout.addWidget(self.entriesButton, 5, 2)
+
+        self.top_spacer    = QtGui.QSpacerItem(200, 20)
+        self.bottom_spacer = QtGui.QSpacerItem(200, 30)
+        self.submitLayout.addItem(self.top_spacer, 0, 1, 1, 3)
+        self.submitLayout.addItem(self.bottom_spacer, 6, 1, 1, 3)
 
     def setupLayout(self):
-        pass
+        self.mainLayout = QtGui.QHBoxLayout(self.centralwidget)
+        self.mainLayout.addLayout(self.submitLayout)
+        self.mainLayout.addWidget(self.mediaBox)
 
     def _drTie(self):
         if self.book_radio.isChecked():
