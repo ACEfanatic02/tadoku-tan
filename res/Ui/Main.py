@@ -24,14 +24,14 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
 
         # Setup individual parts of the window
-        self.setupMediaButtons()
-        self.setupMenuAndStatusBars()
-        self.setupSubmitAndLabels()
+        self.setupMediaButtons(MainWindow)
+        self.setupMenuAndStatusBars(MainWindow)
+        self.setupSubmitAndLabels(MainWindow)
 
         # Setup the overall layout of the window
         self.setupLayout()
 
-    def setupMediaButtons(self):
+    def setupMediaButtons(self, MainWindow):
         # Setup group box surrounding the media selections
         self.mediaBox = QtGui.QGroupBox(self.centralwidget)
         self.mediaBox.setGeometry(QtCore.QRect(225, 0, 200, 250))
@@ -86,7 +86,7 @@ class Ui_MainWindow(object):
         self.mediaBox.setLayout(self.mediaGrid)
 
 
-    def setupMenuAndStatusBars(self):
+    def setupMenuAndStatusBars(self, MainWindow):
         # Status bar
         self.statusbar = QtGui.QStatusBar(MainWindow)
         MainWindow.setStatusBar(self.statusbar)
@@ -100,19 +100,19 @@ class Ui_MainWindow(object):
         self.menuFile.setTitle(_fromUtf8("&File"))
         self.actionLoad = QtGui.QAction(MainWindow)
         self.actionSave = QtGui.QAction(MainWindow)
-        self.actionQuit = QtGui.QAction(MainWindow)
+        self.actionExit = QtGui.QAction(MainWindow)
         self.actionLoad.setText(_fromUtf8("&Load..."))
         self.actionSave.setText(_fromUtf8("&Save"))
-        self.actionQuit.setText(_fromUtf8("&Quit"))
+        self.actionExit.setText(_fromUtf8("E&xit"))
 
         self.menuFile.addAction(self.actionLoad)
         self.menuFile.addAction(self.actionSave)
         self.menuFile.addSeparator()
-        self.menuFile.addAction(self.actionQuit)
+        self.menuFile.addAction(self.actionExit)
 
         self.menubar.addMenu(self.menuFile)
 
-    def setupSubmitAndLabels(self):
+    def setupSubmitAndLabels(self, MainWindow):
         # Create submit fields
         self.amountRead = QtGui.QLineEdit(self.centralwidget)
         self.timesRead  = QtGui.QLineEdit(self.centralwidget)
@@ -141,16 +141,18 @@ class Ui_MainWindow(object):
         self.submitLayout.addWidget(self.timesRead, 2, 2, 1, 2)
         self.submitLayout.addWidget(self.submitButton, 3, 1,)
 
-        self.submitLayout.addWidget(self.totalscorelb, 4, 1, 2, 1)
-        self.submitLayout.addWidget(self.total_score, 4, 2, 2, 2)
+        self.submitLayout.addWidget(self.totalscorelb, 5, 1, 1, 1)
+        self.submitLayout.addWidget(self.total_score, 5, 2, 1, 2)
 
-        self.submitLayout.addWidget(self.scoresButton, 5, 1)
-        self.submitLayout.addWidget(self.entriesButton, 5, 2)
+        self.submitLayout.addWidget(self.scoresButton, 6, 1)
+        self.submitLayout.addWidget(self.entriesButton, 6, 2)
 
         self.top_spacer    = QtGui.QSpacerItem(200, 20)
-        self.bottom_spacer = QtGui.QSpacerItem(200, 30)
+        self.bottom_spacer = QtGui.QSpacerItem(200, 20)
+        self.mid_spacer    = QtGui.QSpacerItem(200, 40)
         self.submitLayout.addItem(self.top_spacer, 0, 1, 1, 3)
-        self.submitLayout.addItem(self.bottom_spacer, 6, 1, 1, 3)
+        self.submitLayout.addItem(self.mid_spacer, 4, 1, 1, 3)
+        self.submitLayout.addItem(self.bottom_spacer, 7, 1, 1, 3)
 
     def setupLayout(self):
         self.mainLayout = QtGui.QHBoxLayout(self.centralwidget)

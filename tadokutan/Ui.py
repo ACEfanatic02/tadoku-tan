@@ -13,7 +13,9 @@ import sys
 
 # Import Ui pieces
 from PyQt4.QtGui import *
-from res.tadokutan_newentry import Ui_MainWindow
+
+from res.Ui.Main import Ui_MainWindow
+#from res.tadokutan_newentry import Ui_MainWindow
 from res.tadokutan_scores import Ui_ScoresDlg
 from res.tadokutan_entries import Ui_EntriesDlg
 
@@ -31,7 +33,7 @@ class MainWindow(QMainWindow):
         self.ui.book_radio.setChecked(True)
 
         # Tie the enable/disable of DR checkbox to the book radio button.
-        self.ui.book_radio.toggled.connect(self.drTie)
+        #self.ui.book_radio.toggled.connect(self.drTie)
 
         # Set a default filename
         self.filename = 'tadoku.sav'
