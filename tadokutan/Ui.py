@@ -15,8 +15,9 @@ import sys
 from PyQt4.QtGui import *
 
 from res.Ui.Main import Ui_MainWindow
+from res.Ui.Scores import Ui_ScoresDlg
 #from res.tadokutan_newentry import Ui_MainWindow
-from res.tadokutan_scores import Ui_ScoresDlg
+#from res.tadokutan_scores import Ui_ScoresDlg
 from res.tadokutan_entries import Ui_EntriesDlg
 
 import tadokutan.Log
@@ -82,7 +83,7 @@ class MainWindow(QMainWindow):
         self.tadokulog.save(self.filename)
 
     def scoresClick(self):
-        # Opens the scores dialog and passes it a copy of the Tadoku log.
+        # Opens the scores dialog and passes it a reference to the Tadoku log.
         scoredlg = ScoreDlg(self.tadokulog)
 
     def entriesClick(self):
@@ -141,6 +142,7 @@ class MainWindow(QMainWindow):
     def updateScore(self):
         # Updates the total score display on the window.
         self.ui.total_score.setNum(round(self.tadokulog.getScore(), 2))
+        self.ui.amountRead.setFocus()
 
     def drTie(self):
         # If the book radio button is off, disable the double-row checkbox.

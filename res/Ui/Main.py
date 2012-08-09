@@ -85,7 +85,6 @@ class Ui_MainWindow(object):
         self.mediaGrid.addStretch(1)
         self.mediaBox.setLayout(self.mediaGrid)
 
-
     def setupMenuAndStatusBars(self, MainWindow):
         # Status bar
         self.statusbar = QtGui.QStatusBar(MainWindow)
@@ -147,12 +146,14 @@ class Ui_MainWindow(object):
         self.submitLayout.addWidget(self.scoresButton, 6, 1)
         self.submitLayout.addWidget(self.entriesButton, 6, 2)
 
-        self.top_spacer    = QtGui.QSpacerItem(200, 20)
+        self.top_spacer    = QtGui.QSpacerItem(200, 15)
         self.bottom_spacer = QtGui.QSpacerItem(200, 20)
         self.mid_spacer    = QtGui.QSpacerItem(200, 40)
+        self.left_spacer   = QtGui.QSpacerItem(10, 200)
         self.submitLayout.addItem(self.top_spacer, 0, 1, 1, 3)
         self.submitLayout.addItem(self.mid_spacer, 4, 1, 1, 3)
         self.submitLayout.addItem(self.bottom_spacer, 7, 1, 1, 3)
+        self.submitLayout.addItem(self.left_spacer, 1, 0, 7, 1)
 
     def setupLayout(self):
         self.mainLayout = QtGui.QHBoxLayout(self.centralwidget)
