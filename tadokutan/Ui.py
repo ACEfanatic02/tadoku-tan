@@ -16,9 +16,10 @@ from PyQt4.QtGui import *
 
 from res.Ui.Main import Ui_MainWindow
 from res.Ui.Scores import Ui_ScoresDlg
+from res.Ui.Entries import Ui_EntriesDlg
 #from res.tadokutan_newentry import Ui_MainWindow
 #from res.tadokutan_scores import Ui_ScoresDlg
-from res.tadokutan_entries import Ui_EntriesDlg
+#from res.tadokutan_entries import Ui_EntriesDlg
 
 import tadokutan.Log
 
@@ -144,12 +145,12 @@ class MainWindow(QMainWindow):
         self.ui.total_score.setNum(round(self.tadokulog.getScore(), 2))
         self.ui.amountRead.setFocus()
 
-    def drTie(self):
-        # If the book radio button is off, disable the double-row checkbox.
-        if self.ui.book_radio.isChecked():
-            self.ui.dr_check.setEnabled(True)
-        else:
-            self.ui.dr_check.setEnabled(False)
+    # def drTie(self):
+    #     # If the book radio button is off, disable the double-row checkbox.
+    #     if self.ui.book_radio.isChecked():
+    #         self.ui.dr_check.setEnabled(True)
+    #     else:
+    #         self.ui.dr_check.setEnabled(False)
 
     def fileLoad(self):
         # Retrieves filename from dialog and loads file.

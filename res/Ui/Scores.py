@@ -24,6 +24,8 @@ class Ui_ScoresDlg(object):
         # Buttons
         self.buttonBox = QtGui.QDialogButtonBox(ScoresDlg)
         self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Ok)
+        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), ScoresDlg.accept)
+        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), ScoresDlg.reject)
 
         self.scoreValueGroup = QtGui.QButtonGroup(ScoresDlg)
         self.scores_radio    = QtGui.QRadioButton(ScoresDlg)
