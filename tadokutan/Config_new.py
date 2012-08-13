@@ -26,20 +26,21 @@ SCORING_DEFAULTS = {
 }
 OTHER_DEFAULTS = {
     "twitter":      "False",
-    "language":     "ja"
+    "language":     "'ja'",
 }
 
 class TadokuConfig(object):
 
     def __init__(self, filename = "tadoku.ini"):
         self.filename = filename
+        self.config = None
 
     def createConfig(self):
         # Create a new config parser, fill with default values
         self.config = ConfigParser.ConfigParser()
 
-        self.config.addSection("SCORING")
-        self.config.addSection("OTHER")
+        self.config.add_section("SCORING")
+        self.config.add_section("OTHER")
         for item in SCORING_DEFAULTS.keys():
             self.config.set("SCORING", item, SCORING_DEFAULTS[item])
         for item in OTHER_DEFAULTS.keys():
@@ -64,13 +65,13 @@ class TadokuConfig(object):
             self.createConfig()
 
         # Read config file, overwriting defaults where they differ
-        config.read(self.filename)
+        self.config.read(self.filename)
 
         # Assign config values to instance variables. (Values are evaluated.)
         for item in SCORING_DEFAULTS.keys():
-            vars(self)[item] = ast.literal_eval(config.get("SCORING", item))
+            vars(self)[item] = ast.literal_eval(self.config.get("SCORING", item))
         for item in OTHER_DEFAULTS.keys():
-            vars(self)[item] = ast.literal_eval(config.get("OTHER", item))
+            vars(self)[item] = ast.literal_eval(self.config.get("OTHER", item))
 
     def saveConfig(self):
         try:
