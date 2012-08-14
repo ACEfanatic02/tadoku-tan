@@ -3,13 +3,12 @@
 
 ######
 ##  Tadoku-Tan -- Offline Tadoku Reading Log
-##  Config/tests.py -- Config unit-test suite
+##  Config_tests.py -- Config unit-test suite
 ######
 
 import unittest
 import os
 import sys
-import logging
 
 # HACK: append .. to path so we can import the main tadokutan module
 sys.path.append("..")
@@ -20,10 +19,8 @@ class TestConfig(unittest.TestCase):
     def setUp(self):
         # Init class with test filename
         self.config = Config.TadokuConfig(filename = "test.ini")
-        logging.info("### TEST CONFIG SETUP ###")
 
     def test_create(self):
-        logging.info("### TEST CONFIG CREATE ###")
         self.config.createConfig()
 
         for option in self.config.config.options("SCORING"):

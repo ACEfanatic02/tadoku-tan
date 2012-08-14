@@ -12,7 +12,7 @@ import cPickle
 import os
 
 # Local Imports
-import tadokutan.Config_new
+import tadokutan.Config_new as Config
 
 class TadokuLog(object):
     ####
