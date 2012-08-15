@@ -14,13 +14,14 @@ import datetime
 sys.path.append("..")
 from tadokutan import Log, Config_new as Config
 
+
 class TestLog(unittest.TestCase):
 
     def setUp(self):
         cfg = Config.TadokuConfig(filename = "test.ini")
         cfg.loadConfig()
         self.log = Log.TadokuLog(cfg = cfg)
-        self.filename = "tests/saves/test.sav"
+        self.filename = "tests/test.sav"
 
     def test_logconfig(self):
         # Assert that the contents of the log config are set to the proper defaults
@@ -127,13 +128,50 @@ class TestLog(unittest.TestCase):
         self.assertEqual(subs_score, 2)
         self.assertAlmostEqual(sent_score, (10.0/17.0))
 
+    def test_getValue(self):
+        now = datetime.datetime.today()
+
+        self.log.addEntry(now, "BOOK", 10, 0)
+        self.log.addEntry(now, "BKDR", 10, 0)
+        self.log.addEntry(now, "MNGA", 10, 0)
+        self.log.addEntry(now, "LYRC", 10, 0)
+        self.log.addEntry(now, "WBPG", 10, 0)
+        self.log.addEntry(now, "NEWS", 10, 0)
+        self.log.addEntry(now, "FLGM", 10, 0)
+        self.log.addEntry(now, "GAME", 10, 0)
+        self.log.addEntry(now, "NICO", 10, 0)
+        self.log.addEntry(now, "SUBS", 10, 0)
+        self.log.addEntry(now, "SENT", 10, 0)
+
+        self.assertEqual(self.log.getValue(types = []), 0,
+            msg = "If argument types is empty, should return 0")
+
+        self.assertEqual(self.log.getValue(types = ["BOOK"]), 10)
+        self.assertEqual(self.log.getValue(types = ["BKDR"]), 10)
+        self.assertEqual(self.log.getValue(types = ["MNGA"]), 10)
+        self.assertEqual(self.log.getValue(types = ["LYRC"]), 10)
+        self.assertEqual(self.log.getValue(types = ["WBPG"]), 10)
+        self.assertEqual(self.log.getValue(types = ["NEWS"]), 10)
+        self.assertEqual(self.log.getValue(types = ["FLGM"]), 10)
+        self.assertEqual(self.log.getValue(types = ["GAME"]), 10)
+        self.assertEqual(self.log.getValue(types = ["NICO"]), 10)
+        self.assertEqual(self.log.getValue(types = ["SUBS"]), 10)
+        self.assertEqual(self.log.getValue(types = ["SENT"]), 10)
+
+    def test_save(self):
+        self.log.save(fn = self.filename)
+        self.assertTrue(os.path.exists(self.filename))
+
+    def test_load(self):
+        self.log.save(fn = self.filename)
+        self.assertTrue(isinstance(self.log.load(self.filename), Log.TadokuLog))
+
     def tearDown(self):
         if os.path.isfile("test.ini"):
-            os.path.unlink("test.ini")
-        if os.path.isfile("tests/saves/test.sav"):
-            os.path.unlink("tests/saves/test.sav")
+            os.unlink("test.ini")
+        if os.path.isfile(self.filename):
+            os.unlink(self.filename)
         self.assertFalse(os.path.exists("test.ini"),
             msg = "TestLog: tear down failed; test.ini not deleted")
-        self.assertFalse(os.path.exists("tests/saves/test.sav"),
+        self.assertFalse(os.path.exists(self.filename),
             msg = "TestLog: tear down failed; test.sav not deleted")
-        

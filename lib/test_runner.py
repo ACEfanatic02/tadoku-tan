@@ -18,8 +18,12 @@ if sys.platform.startswith('win32'):
 
 class ModuleTestRunner(object):
     """
-    ModuleTestRunner -- init with module name as string,
-    add test cases.  INSTANCE.run() to run the suite.
+    ModuleTestRunner
+
+    Use addTest() to add individual TestCases
+    Use addTestList() to add lists of TestCases
+
+    modname = module name for test display
     """
 
     def __init__(self):
@@ -27,10 +31,21 @@ class ModuleTestRunner(object):
         self.tests = {}
 
     def addTest(self, modname, test):
+        assert isinstance(test, unittest.TestCase)
+
         if modname in self.tests.keys():
             self.tests[modname].append(test)
         else:
-            self.tests[modname] = test
+            self.tests[modname] = [test]
+
+    def addTestList(self, modname, testlist):
+        assert isinstance(testlist, list)
+
+        if modname in self.tests.keys():
+            for test in testlist:
+                self.tests[modname].append(test)
+        else:
+            self.tests[modname] = testlist
 
     def run(self):
         fails = []
