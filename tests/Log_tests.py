@@ -144,7 +144,7 @@ class TestLog(unittest.TestCase):
         self.log.addEntry(now, "SENT", 10, 0)
 
         self.assertEqual(self.log.getValue(types = []), 0,
-            msg = "If argument types is empty, should return 0")
+            msg = "If argument 'types' is empty, should return 0")
 
         self.assertEqual(self.log.getValue(types = ["BOOK"]), 10)
         self.assertEqual(self.log.getValue(types = ["BKDR"]), 10)
