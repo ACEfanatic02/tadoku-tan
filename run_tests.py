@@ -44,19 +44,19 @@ tadokutests = test_runner.ModuleTestRunner()
 
 
 tadokutests.addTestList("Config", [config_create,
-                               config_save, 
-                               config_load])
+                                   config_save, 
+                                   config_load])
 
 tadokutests.addTestList("Log", [log_cfg, 
-                            log_clone, 
-                            log_add, 
-                            log_undoTstmp, 
-                            log_undoLast,
-                            log_getScoreAll,
-                            log_getScoreType,
-                            log_getValue,
-                            log_save,
-                            log_load])
+                                log_clone, 
+                                log_add, 
+                                log_undoTstmp, 
+                                log_undoLast,
+                                log_getScoreAll,
+                                log_getScoreType,
+                                log_getValue,
+                                log_save,
+                                log_load])
 
 if __name__ == "__main__":
     # Run indivdual test suites

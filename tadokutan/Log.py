@@ -12,7 +12,7 @@ import cPickle
 import os
 
 # Local Imports
-import tadokutan.Config_new as Config
+import Config_new as Config
 
 class TadokuLog(object):
     ####
@@ -32,7 +32,7 @@ class TadokuLog(object):
 
         # If no config given, create one with default values.
         if cfg == None:
-            self.cfg = tadokutan.Config.TadokuConfig()
+            self.cfg = Config.TadokuConfig()
             self.cfg.loadConfig()
         else:
             self.cfg = cfg

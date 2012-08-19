@@ -11,9 +11,7 @@ import sys
 import logging
 
 # Local Imports
-import tadokutan.Config
-import tadokutan.Log
-import tadokutan.Ui
+from tadokutan import Config, Log, Ui
 
 from PyQt4.QtGui import QApplication
 
@@ -24,7 +22,7 @@ logging.basicConfig(filename = "tadokutan.log",
 
 # Launch program
 app = QApplication(sys.argv, True)
-main = tadokutan.Ui.MainWindow()
+main = Ui.MainWindow()
 
 main.show()
 
