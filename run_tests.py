@@ -12,7 +12,7 @@ import sys
 import logging
 
 sys.path.append(".")
-from tests import Config_tests, Log_tests
+from tests import Config_tests, Log_tests, Tweet_tests
 from lib import test_runner
 
 # filenames for tests, so we don't pollute the actual save and log:
@@ -40,6 +40,8 @@ log_getValue     = Log_tests.TestLog('test_getValue')
 log_save         = Log_tests.TestLog('test_save')
 log_load         = Log_tests.TestLog('test_load')
 
+tweet_entryTo    = Tweet_tests.TestTweet('test_entryToTweet')
+
 tadokutests = test_runner.ModuleTestRunner()
 
 
@@ -57,6 +59,8 @@ tadokutests.addTestList("Log", [log_cfg,
                                 log_getValue,
                                 log_save,
                                 log_load])
+
+tadokutests.addTestList("Tweet", [tweet_entryTo])
 
 if __name__ == "__main__":
     # Run indivdual test suites
