@@ -53,6 +53,8 @@ class ModuleTestRunner(object):
         skips = []
         count = 0
 
+        writec("Running tests:\n", 'blue')
+
         start = time.time()
 
         for modname in self.tests.keys():

@@ -10,10 +10,10 @@ import datetime
 import sys
 import logging
 
+from PyQt4.QtGui import QApplication
+
 # Local Imports
 from tadokutan import Config, Log, Ui
-
-from PyQt4.QtGui import QApplication
 
 # Configure logging system
 logging.basicConfig(filename = "tadokutan.log",
