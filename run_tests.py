@@ -15,15 +15,9 @@ sys.path.append(".")
 from tests import Config_tests, Log_tests, Tweet_tests
 from lib import test_runner
 
-# filenames for tests, so we don't pollute the actual save and log:
-now = datetime.datetime.today()
-timestamp = now.isoformat('_')
 
 # Suppress log messages on stderr
 logging.basicConfig(level = logging.CRITICAL)
-
-
-TEST_SAVE_FN = "tests/saves/test_"+str(timestamp)+".sav"
 
 config_create = Config_tests.TestConfig('test_create')
 config_save   = Config_tests.TestConfig('test_save')
@@ -41,9 +35,10 @@ log_save         = Log_tests.TestLog('test_save')
 log_load         = Log_tests.TestLog('test_load')
 
 tweet_entryTo    = Tweet_tests.TestTweet('test_entryToTweet')
+tweet_error      = Tweet_tests.TestTweet('test_errorHandling')
+
 
 tadokutests = test_runner.ModuleTestRunner()
-
 
 tadokutests.addTestList("Config", [config_create,
                                    config_save, 
@@ -60,7 +55,8 @@ tadokutests.addTestList("Log", [log_cfg,
                                 log_save,
                                 log_load])
 
-tadokutests.addTestList("Tweet", [tweet_entryTo])
+tadokutests.addTestList("Tweet", [tweet_entryTo,
+                                  tweet_error])
 
 if __name__ == "__main__":
     # Run indivdual test suites

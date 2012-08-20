@@ -30,6 +30,8 @@ TYPE_HASH = {
     "SENT": " #sentences",
 }
 
+TWEET_MAX_LEN = 140
+
 def entryToTweet(entrytype, value, times = 1):
     # Given type, value, and times read, convert an entry to
     # the format expected by TadokuBot
@@ -39,8 +41,7 @@ def entryToTweet(entrytype, value, times = 1):
     if entrytype in TYPE_HASH.keys():
         typetag = TYPE_HASH[entrytype]
     else:
-        logging.error("Error:  an entry type must be provided.")
-        return None
+        raise ValueError("ERROR: A valid entrytype is required to create a tweet.")
 
     # Note that times read is not a required value, 
     # the bot will read the entry fine without it.
@@ -67,4 +68,8 @@ def entryToTweet(entrytype, value, times = 1):
     # Merge all tags together into a single tweet:
     # EX: "@TadokuBot 140 #book #second;"
     tweet = AT_STATEMENT + valtag + typetag + timestag + ";"
+
+    # You'd have to do something incredibly stupid for
+    # this to fail... but, sanity check:
+    assert len(tweet) <= TWEET_MAX_LEN
     return tweet

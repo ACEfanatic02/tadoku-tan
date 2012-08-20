@@ -35,5 +35,8 @@ class TestTweet(unittest.TestCase):
         self.assertEqual(tweetC, "@TadokuBot 1:30 #subs;")
         self.assertEqual(tweetD, "@TadokuBot 1:01 #nico;")
 
+    def test_errorHandling(self):
+        self.assertRaises(ValueError, Tweet.entryToTweet, "", 100)
+
     def tearDown(self):
         pass
