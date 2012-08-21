@@ -17,11 +17,12 @@ from PyQt4.QtGui import *
 from res.Ui.Main import Ui_MainWindow
 from res.Ui.Scores import Ui_ScoresDlg
 from res.Ui.Entries import Ui_EntriesDlg
-#from res.tadokutan_newentry import Ui_MainWindow
-#from res.tadokutan_scores import Ui_ScoresDlg
-#from res.tadokutan_entries import Ui_EntriesDlg
+
+from res.Ui.Misc import TweetDlg
+
 
 import tadokutan.Log
+import tadokutan.Tweet
 
 class MainWindow(QMainWindow):
 
@@ -79,6 +80,10 @@ class MainWindow(QMainWindow):
 
         logging.info("Entry at " + str(timestamp) + ": " + str(value) + " " + entrytype)
         self.ui.statusbar.showMessage("Entry added.", 300)
+
+        # Create and display twitter message:
+        tweet = Tweet.entryToTweet(entrytype, value, times = times)
+        TweetDlg(tweet)
 
         # Automatically save the file.  (This will be a config option in later versions.)
         self.tadokulog.save(self.filename)
