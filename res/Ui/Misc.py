@@ -41,6 +41,28 @@ class TweetDlg(QtGui.QDialog):
         self.show()
 
 
+class Ui_ConfigDlg(object):
+
+    def setupUi(self, ConfigDlg):
+        # Dialog setup:
+        ConfigDlg.resize(350, 250) ## TODO: Adjust size as necessary
+        ConfigDlg.setWindowTitle(_fromUtf8("Configuration Settings"))
+        ConfigDlg.setModal(True)
+
+        # Input:
+        self.twitterButtons = QtGui.QButtonGroup()
+        self.twitterButtons.setExclusive(True)
+        self.twitterOn  = QtGui.QRadioButton(self.twitterButtons)
+        self.twitterOff = QtGui.QRadioButton(self.twitterButtons)
+
+        # Buttons:
+        self.buttonBox = QtGui.QDialogButtonBox(ConfigDlg)
+        self.buttonBox.setOrientation(QtCore.Qt.Vertical)
+        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
+        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("accepted()")), ConfigDlg.accept)
+        QtCOre.QObject.connect(self.buttonBox, QtCore.SIGNAL(_fromUtf8("rejected()")), ConfigDlg.reject)
+
+
 if __name__ == '__main__':
     import sys
     app = QtGui.QApplication(sys.argv)
