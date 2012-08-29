@@ -109,7 +109,16 @@ class Ui_MainWindow(object):
         self.menuFile.addSeparator()
         self.menuFile.addAction(self.actionExit)
 
+        # Tools menu
+        self.menuTools = QtGui.QMenu(self.menubar)
+        self.menuTools.setText(_fromUtf8("&Tools"))
+        self.actionConfig = QtGui.QAction(MainWindow)
+        self.actionConfig.setText(_fromUtf8("&Config Settings..."))
+
+        self.menuTools.addAction(self.actionConfig)
+
         self.menubar.addMenu(self.menuFile)
+        self.menubar.addMenu(self.menuTools)
 
     def setupSubmitAndLabels(self, MainWindow):
         # Create submit fields

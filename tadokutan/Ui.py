@@ -18,7 +18,7 @@ from res.Ui.Main import Ui_MainWindow
 from res.Ui.Scores import Ui_ScoresDlg
 from res.Ui.Entries import Ui_EntriesDlg
 
-from res.Ui.Misc import TweetDlg
+from res.Ui.Misc import TweetDlg, ConfigDlg
 
 
 import tadokutan.Log
@@ -54,6 +54,8 @@ class MainWindow(QMainWindow):
         self.ui.actionLoad.triggered.connect(self.fileLoad)
         self.ui.actionSave.triggered.connect(self.fileSave)
         self.ui.actionExit.triggered.connect(self.fileExit)
+        # Tools menu
+        self.ui.actionConfig.triggered.connect(self.toolsConfig)
 
         # Create this session's Tadoku log, load the default file if it exists.
         self.tadokulog = tadokutan.Log.TadokuLog()
@@ -181,6 +183,9 @@ class MainWindow(QMainWindow):
         self.tadokulog.save(self.filename)
         logging.info("Program exit - File menu.")
         sys.exit()
+
+    def toolsConfig(self):
+        pass
 
 class ScoreDlg(QDialog):
 

@@ -31,6 +31,8 @@ class ModuleTestRunner(object):
         self.tests = {}
 
     def addTest(self, modname, test):
+        """ Adds a single unittest TestCase instance to
+            be tested. """
         assert isinstance(test, unittest.TestCase)
 
         if modname in self.tests.keys():
@@ -39,7 +41,12 @@ class ModuleTestRunner(object):
             self.tests[modname] = [test]
 
     def addTestList(self, modname, testlist):
+        """ Adds a list of unittest TestCases to be tested. """
         assert isinstance(testlist, list)
+
+        for test in testlist:
+            if not isinstance(test, unittest.TestCase):
+                raise AttributeError("Invalid object provided.  All tests must be subclassed from unittest.TestCase.")
 
         if modname in self.tests.keys():
             for test in testlist:
@@ -48,6 +55,7 @@ class ModuleTestRunner(object):
             self.tests[modname] = testlist
 
     def run(self):
+        """ Runs test suite. """
         fails = []
         err   = []
         skips = []
