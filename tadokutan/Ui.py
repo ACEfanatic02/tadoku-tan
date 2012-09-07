@@ -23,6 +23,7 @@ from res.Ui.Misc import TweetDlg, ConfigDlg
 
 import tadokutan.Log
 import tadokutan.Tweet
+import tadokutan.Config_new as Config
 
 class MainWindow(QMainWindow):
 
@@ -152,13 +153,6 @@ class MainWindow(QMainWindow):
         self.ui.total_score.setNum(round(self.tadokulog.getScore(), 2))
         self.ui.amountRead.setFocus()
 
-    # def drTie(self):
-    #     # If the book radio button is off, disable the double-row checkbox.
-    #     if self.ui.book_radio.isChecked():
-    #         self.ui.dr_check.setEnabled(True)
-    #     else:
-    #         self.ui.dr_check.setEnabled(False)
-
     def fileLoad(self):
         # Retrieves filename from dialog and loads file.
         fn = QFileDialog.getOpenFileName(self, "Load...", "", "Tadoku Saves (*.sav)")
@@ -185,7 +179,19 @@ class MainWindow(QMainWindow):
         sys.exit()
 
     def toolsConfig(self):
-        pass
+        workingcfg = Config.TadokuConfig()
+        workingcfg.createConfig()
+        workingcfg.updateConfig(self.tadokulog.cfg)
+
+        cfgdlg = ConfigDlg(workingcfg)
+        cfgdlg.exec_()
+        logging.info("Config dialog opened.")
+
+        if cfgdlg.result():
+            self.tadokulog.cfg.updateConfig(workingcfg)
+            self.tadokulog.cfg.saveConfig()
+
+        self.updateScore()
 
 class ScoreDlg(QDialog):
 

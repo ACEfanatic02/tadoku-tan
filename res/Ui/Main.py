@@ -111,7 +111,7 @@ class Ui_MainWindow(object):
 
         # Tools menu
         self.menuTools = QtGui.QMenu(self.menubar)
-        self.menuTools.setText(_fromUtf8("&Tools"))
+        self.menuTools.setTitle(_fromUtf8("&Tools"))
         self.actionConfig = QtGui.QAction(MainWindow)
         self.actionConfig.setText(_fromUtf8("&Config Settings..."))
 

@@ -150,54 +150,52 @@ class Ui_ConfigDlg(object):
 class ConfigDlg(QtGui.QDialog):
 
     def __init__(self, cfg):
+        QtGui.QDialog.__init__(self)
+
         self.ui = Ui_ConfigDlg()
         self.ui.setupUi(self)
 
-        # oldCfg is given on init; newCfg holds adjusted config values for return on accept
-        self.oldCfg = cfg
-        self.newCfg = Config.TadokuConfig()
-        self.newCfg.createConfig()
+        self.cfg = cfg
 
         # Set the values of our entry boxes to match our current cfg values:
-        self.ui.bookVal.setText(_fromUtf8(self.oldCfg.book))
-        self.ui.bookDrVal.setText(_fromUtf8(self.oldCfg.bookdr))
-        self.ui.mangaVal.setText(_fromUtf8(self.oldCfg.manga))
-        self.ui.lyricVal.setText(_fromUtf8(self.oldCfg.lyric))
-        self.ui.webVal.setText(_fromUtf8(self.oldCfg.web))
-        self.ui.newsVal.setText(_fromUtf8(self.oldCfg.news))
-        self.ui.flgameVal.setText(_fromUtf8(self.oldCfg.fullgame))
-        self.ui.gameVal.setText(_fromUtf8(self.oldCfg.game))
-        self.ui.nicoVal.setText(_fromUtf8(self.oldCfg.nico))
-        self.ui.subsVal.setText(_fromUtf8(self.oldCfg.subs))
-        self.ui.sentVal.setText(_fromUtf8(self.oldCfg.sentences))
+        self.ui.bookVal.setText(_fromUtf8(str(self.cfg.book)))
+        self.ui.bookDrVal.setText(_fromUtf8(str(self.cfg.bookdr)))
+        self.ui.mangaVal.setText(_fromUtf8(str(self.cfg.manga)))
+        self.ui.lyricVal.setText(_fromUtf8(str(self.cfg.lyric)))
+        self.ui.webVal.setText(_fromUtf8(str(self.cfg.web)))
+        self.ui.newsVal.setText(_fromUtf8(str(self.cfg.news)))
+        self.ui.flgameVal.setText(_fromUtf8(str(self.cfg.fullgame)))
+        self.ui.gameVal.setText(_fromUtf8(str(self.cfg.game)))
+        self.ui.nicoVal.setText(_fromUtf8(str(self.cfg.nico)))
+        self.ui.subsVal.setText(_fromUtf8(str(self.cfg.subs)))
+        self.ui.sentVal.setText(_fromUtf8(str(self.cfg.sentences)))
 
         # Default twitter setting:
-        if self.oldCfg.twitter == True:
+        if self.cfg.twitter == True:
             self.ui.twitterOn.setChecked(True)
         else:
             self.ui.twitterOff.setChecked(True)
 
     def accept(self):
         # Update the config with new values:
-        self.newCfg.config.set("SCORING", "book", self.ui.bookVal)
-        self.newCfg.config.set("SCORING", "bookdr", self.ui.bookDrVal)
-        self.newCfg.config.set("SCORING", "manga", self.ui.mangaVal)
-        self.newCfg.config.set("SCORING", "lyric", self.ui.lyricVal)
-        self.newCfg.config.set("SCORING", "web", self.ui.webVal)
-        self.newCfg.config.set("SCORING", "news", self.ui.newsVal)
-        self.newCfg.config.set("SCORING", "fullgame", self.ui.flgameVal)
-        self.newCfg.config.set("SCORING", "game", self.ui.gameVal)
-        self.newCfg.config.set("SCORING", "nico", self.ui.nicoVal)
-        self.newCfg.config.set("SCORING", "subs", self.ui.subsVal)
-        self.newCfg.config.set("SCORING", "sentences", self.ui.sentVal)
+        self.cfg.config.set("SCORING", "book", str(self.ui.bookVal.text()))
+        self.cfg.config.set("SCORING", "bookdr", str(self.ui.bookDrVal.text()))
+        self.cfg.config.set("SCORING", "manga", str(self.ui.mangaVal.text()))
+        self.cfg.config.set("SCORING", "lyric", str(self.ui.lyricVal.text()))
+        self.cfg.config.set("SCORING", "web", str(self.ui.webVal.text()))
+        self.cfg.config.set("SCORING", "news", str(self.ui.newsVal.text()))
+        self.cfg.config.set("SCORING", "fullgame", str(self.ui.flgameVal.text()))
+        self.cfg.config.set("SCORING", "game", str(self.ui.gameVal.text()))
+        self.cfg.config.set("SCORING", "nico", str(self.ui.nicoVal.text()))
+        self.cfg.config.set("SCORING", "subs", str(self.ui.subsVal.text()))
+        self.cfg.config.set("SCORING", "sentences", str(self.ui.sentVal.text()))
 
         if self.ui.twitterOn.isChecked():
-            self.newCfg.config.set("OTHER", "twitter", "True")
+            self.cfg.config.set("OTHER", "twitter", "True")
         else:
-            self.newCfg.config.set("OTHER", "twitter", "False")
+            self.cfg.config.set("OTHER", "twitter", "False")
 
-        self.oldCfg.updateConfig(self.newCfg)
-        super.accept(self)
+        QtGui.QDialog.accept(self)
 
 if __name__ == '__main__':
     import sys

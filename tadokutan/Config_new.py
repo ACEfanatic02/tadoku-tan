@@ -48,10 +48,15 @@ class TadokuConfig(object):
 
     def updateConfig(self, newcfg):
         # Update the instance config with new values
-        for item, value in newcfg.items("SCORING"):
+        for item, value in newcfg.config.items("SCORING"):
             self.config.set("SCORING", item, value)
-        for item, value in newcfg.items("OTHER"):
+        for item, value in newcfg.config.items("OTHER"):
             self.config.set("OTHER", item, value)
+            
+        for item in SCORING_DEFAULTS.keys():
+            vars(self)[item] = ast.literal_eval(self.config.get("SCORING", item))
+        for item in OTHER_DEFAULTS.keys():
+            vars(self)[item] = ast.literal_eval(self.config.get("OTHER", item))
 
     def loadConfig(self):
         # Make sure we actually have a config file to work with.
