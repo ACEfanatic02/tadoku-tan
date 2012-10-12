@@ -85,8 +85,9 @@ class MainWindow(QMainWindow):
         self.ui.statusbar.showMessage("Entry added.", 300)
 
         # Create and display twitter message:
-        tweet = tadokutan.Tweet.entryToTweet(entrytype, value, times = times)
-        self.tweetdlg = TweetDlg(tweet)
+        if self.tadokulog.cfg.twitter:
+            tweet = tadokutan.Tweet.entryToTweet(entrytype, value, times = times)
+            self.tweetdlg = TweetDlg(tweet)
 
         # Automatically save the file.  (This will be a config option in later versions.)
         self.tadokulog.save(self.filename)
