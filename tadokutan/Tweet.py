@@ -10,11 +10,14 @@ import logging
 
 # Define constants for Twitter hashtags and the @ statement:
 AT_STATEMENT = "@TadokuBot "
+
+# "times" is stored as one lower than expected for easier calculation of score.
+# Make sure to account for that in the hash:
 TIMES_HASH = {
-    2 : " #second",
-    3 : " #third",
-    4 : " #fourth",
-    5 : " #fifth",
+    1 : " #second",
+    2 : " #third",
+    3 : " #fourth",
+    4 : " #fifth",
 }
 TYPE_HASH = {
     "BOOK": " #book",

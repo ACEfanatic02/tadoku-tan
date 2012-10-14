@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 ######
-##	Tadoku-Tan -- Offline Tadoku Reading Log
-##	tadokutan.py -- Main Scripts
+##  Tadoku-Tan -- Offline Tadoku Reading Log
+##  tadokutan.py -- Main Scripts
 ######
 
 import datetime
@@ -13,7 +13,7 @@ import logging
 from PyQt4.QtGui import QApplication
 
 # Local Imports
-from tadokutan import Config, Log, Ui
+from tadokutan import Ui
 
 # Configure logging system
 logging.basicConfig(filename = "tadokutan.log",
